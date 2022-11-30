@@ -8,10 +8,11 @@ const Home = () => {
     const [nftData, setNftData] = useState(NFTData);
 
     const handleSearch = (value) => {
-        if (value.length) return setNftData(NFTData);
+        if (value.length === 0) return setNftData(NFTData);
 
         const filteredData = NFTData.filter((item) =>
-            item.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
+            item.name.toLowerCase().includes(value.target.value.toString().toLowerCase()));
+
         if (filteredData.length) {
             setNftData(filteredData);
         } else {
@@ -29,7 +30,7 @@ const Home = () => {
                         renderItem={({ item }) => <NFTCard data={item} />}
                         keyExtractor={(item) => item.id}
                         showsVerticalScrollIndicator={false}
-                        ListHeaderComponent={<HomeHeader onSearch={handleSearch}/>}
+                        ListHeaderComponent={<HomeHeader onSearch={handleSearch} />}
                     />
                 </View>
 
